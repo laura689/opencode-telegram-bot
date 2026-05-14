@@ -36,8 +36,8 @@ git config user.email "${GIT_AUTHOR_EMAIL:-bot@nouvellelune.co}"
 git config user.name "${GIT_AUTHOR_NAME:-NL Cofounder Bot}"
 cd /app
 
-echo "[entrypoint] Starting opencode serve on port 4096..."
-opencode serve --port 4096 --hostname 127.0.0.1 &
+echo "[entrypoint] Starting opencode serve on port 4096 from $VAULT_DIR..."
+(cd "$VAULT_DIR" && opencode serve --port 4096 --hostname 127.0.0.1) &
 OPENCODE_PID=$!
 
 echo "[entrypoint] Waiting for opencode to be ready..."
