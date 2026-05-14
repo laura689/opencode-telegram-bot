@@ -1,5 +1,6 @@
 import { Bot, Context, InputFile, NextFunction } from "grammy";
 import { promises as fs } from "fs";
+import * as os from "os";
 import * as path from "path";
 import { fileURLToPath } from "url";
 import { config } from "../config.js";
@@ -130,7 +131,11 @@ const SESSION_RETRY_PREFIX = "🔁";
 const SUBAGENT_STREAM_PREFIX = "🧩";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const TEMP_DIR = path.join(__dirname, "..", ".tmp");
+const TEMP_DIR =
+  process.env.BOT_TEMP_DIR ||
+  (process.env.NODE_ENV === "production"
+    ? path.join(os.tmpdir(), "opencode-telegram-bot")
+    : path.join(__dirname, "..", ".tmp"));
 const sessionCompletionTasks = new Map<string, Promise<void>>();
 
 function getCurrentReplyKeyboard() {

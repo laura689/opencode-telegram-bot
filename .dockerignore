@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+.env
+.env.*
+logs
+run
+.tmp
+*.log
+tests
+coverage
+.github
+.vscode
+.idea
+docs/LOCALIZATION_GUIDE.md
